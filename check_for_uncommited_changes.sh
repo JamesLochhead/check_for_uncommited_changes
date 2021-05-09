@@ -19,7 +19,7 @@ export -f git_status_porcelain
 
 output=$(find . -maxdepth 2 -type d -path "*.git*" -execdir bash -c 'git_status_porcelain "$0"' {} \;)
 
-if echo "output" | egrep ".*" 2>&1 > /dev/null; then
+if echo "$output" | egrep "[^[:space:]]" 2>&1 > /dev/null; then
 	printf '\nThe following repositories have uncommited changes:'
 	printf "\n\n$output\n\n"
 	exit 2
